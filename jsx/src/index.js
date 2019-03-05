@@ -6,12 +6,11 @@ import ReactDOM from 'react-dom';
 const App = () => {
     const labelText = 'Enter Name:';
     const buttonText = {text: 'Click here'};
-    
      return ( 
      <div>
          <label className="label" htmlFor="name">{labelText}</label>
          <input id="name" type="text"/>
-         <button style={{ backgroundColor: 'grey', color: '#222222'}}>{buttonText.text}</button>
+         <button style={{ backgroundColor: 'grey', color: '#222222'}}>{buttonText}</button>
      </div>
      );
 };
