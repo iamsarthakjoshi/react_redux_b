@@ -1,5 +1,5 @@
 import React from 'react';
-import faker from 'faker';
+//import faker from 'faker';
 
 const CommentDetail = props => {
     console.log(props);
