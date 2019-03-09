@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SeasonDisplay from './SeasonDisplay';
+import Loader from './LoaderGif';
 
 /* const App = () => {
     window.navigator.geolocation.getCurr entPosition(
@@ -10,33 +12,46 @@ import ReactDOM from 'react-dom';
 }; */
 
 class App extends React.Component {
-    constructor(props) { 
-        super(props);
-        /* initializing react's state property - 'State' is a JS object that contains data relevant to a component */
-        this.state = { lat: null, errorMessage: '' };
+    // constructor(props) { 
+    //     super(props);
 
+    //     /* initializing react's state property - 'State' is a JS object that contains data relevant to a component */
+    //     this.state = { lat: null, errorMessage: '' };
+    // }
+
+    state = { lat: null, errorMessage: '' };
+
+    componentDidMount() {
+        console.log("Component was rendered to the screen");
         window.navigator.geolocation.getCurrentPosition(
-            position => {
-                /* update this.state */
-                this.setState({ lat: position.coords.latitude })
-            },
-            err => {
-                this.setState({ errorMessage: err.message })
-            }
+            position => this.setState({ lat: position.coords.latitude }),
+            err => this.setState({ errorMessage: err.message })
         );
     }
 
-    /* React says we need to define render method - it is invoked almost all the times */
-    render() {
+    componentDidUpdate() {
+        console.log("Component was just updated - it rerendered");
+    }
+
+    renderContent() {
         if(this.state.errorMessage && !this.state.lat) {
             return <div>Error: {this.state.errorMessage}</div>;
         }
 
         if(!this.state.errorMessage && this.state.lat) {
-            return <div>Latitude: {this.state.lat}</div>;
+            return <SeasonDisplay lat={this.state.lat} />
         }
 
-        return <div>Loading!</div>
+        return <Loader message="Please accept location request."/>;
+    }
+
+    /* React says we need to define render method - it is invoked almost all the times */
+    render() {
+        return (
+            <div className="border red">
+                {this.renderContent()}
+            </div>
+        );
     }
 }
 
