@@ -31,7 +31,7 @@ class SearchBar extends React.Component {
   */
   onFormSubmit = event => {
     event.preventDefault();
-    console.log(this.state.term);
+    //console.log(this.state.term);
     /* 
       - In a class based component, we reference the props object with 'this', 
       unlike in fucntion based component.
