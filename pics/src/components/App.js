@@ -2,6 +2,7 @@ import React from "react";
 //import axios from "axios";
 import unsplash from "../api/unsplash_api";
 import SearchBar from "./SearchBar";
+import ImageList from "./ImageList";
 
 class App extends React.Component {
   state = { images: [] };
@@ -41,7 +42,7 @@ class App extends React.Component {
               unlike in jsx elem ent which is a prop. 
         */}
         <SearchBar _onSubmit={this.onSearchSubmit} />
-        Found: {this.state.images.length} images
+        <ImageList images={this.state.images} />
       </div>
     );
   }
