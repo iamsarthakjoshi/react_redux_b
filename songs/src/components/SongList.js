@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { selectSong } from '../actions'
 
 export class SongList extends Component {
   renderList() {
@@ -7,7 +8,12 @@ export class SongList extends Component {
       return (
         <div className="item" key={song.title}>
           <div className="right floated content">
-            <button className="ui button primary">Select</button>
+            <button
+              className="ui button primary"
+              onClick={() => this.props.selectSong(song)}
+            >
+              Select
+            </button>
           </div>
           <div className="content">{song.title}</div>
         </div>
@@ -16,17 +22,20 @@ export class SongList extends Component {
   }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return <div className="ui divided list">{this.renderList()}</div>
   }
 }
 
 // after passing this to connect(), we actually get all the states
-// in the form of props, for eg line #6
+// in the form of props, for eg console.log(this.props)
 const mapStateToProps = (state) => {
+  // console.log(state)
   return { songs: state.songs }
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+  selectSong
+}
 
-export default connect(mapStateToProps)(SongList)
+export default connect(mapStateToProps, mapDispatchToProps)(SongList)
